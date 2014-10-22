@@ -1,0 +1,11 @@
+<div class="jumbotron center">
+	<h1>Welcome to EirMD</h1>
+	
+<% if user_signed_in? %>
+	The Doctor will be with you shortly
+	<%else %>
+	<p><%=link_to " New Patients Click Here!",new_user_registration_path, class: "btn btn-primary btn-lg"%></p>
+	<% end %>
+
+
+</div>
