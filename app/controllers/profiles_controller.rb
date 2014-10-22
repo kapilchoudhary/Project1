@@ -1,8 +1,10 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :xml, :json
 
   def index
     @profiles = Profile.all
+    respond_with(@profile)
   end
 
   def show
