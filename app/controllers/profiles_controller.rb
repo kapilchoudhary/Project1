@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
   respond_to :html, :xml, :json
 
   def index
@@ -14,6 +15,7 @@ class ProfilesController < ApplicationController
   def new
     @profile = Profile.new
     respond_with(@profile)
+
   end
 
   def edit

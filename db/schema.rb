@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022201312) do
+ActiveRecord::Schema.define(version: 20141021034051) do
 
   create_table "doctors", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -37,11 +37,7 @@ ActiveRecord::Schema.define(version: 20141022201312) do
     t.string   "speciality"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "users_id"
-    t.string   "integer"
   end
-
-  add_index "profiles", ["integer"], name: "index_profiles_on_integer"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
