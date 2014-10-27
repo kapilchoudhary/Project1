@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   respond_to :html, :xml, :json
 
   def index
@@ -13,16 +14,24 @@ class ProfilesController < ApplicationController
   end
 
   def new
-    @profile = Profile.new
-    respond_with(@profile)
-
+    if current_user.profile.nil?
+      @profile = Profile.new 
+      respond_with(@profile)
+    else
+      redirect_to profiles_path, notice: "You can only create one profile as a user"
+    end
   end
 
   def edit
   end
 
   def create
-    @profile = Profile.new(profile_params)
+    @profile = Profile.create({
+        name: params['profile']['name'],
+        speciality: params['profile']['speciality'],
+        city: params['profile']['speciality'],
+        user_id: current_user['id']
+      })
     @profile.save
     respond_with(@profile)
   end
@@ -36,6 +45,11 @@ class ProfilesController < ApplicationController
     @profile.destroy
     respond_with(@profile)
   end
+
+  def correct_user
+      @profile = current_user.profile(id: params[:id])
+      redirect_to profiles_path, notice: "Not authorized to edit this profile." if @profile.nil?
+    end
 
   private
     def set_profile

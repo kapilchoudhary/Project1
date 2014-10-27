@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   
 resources :profiles
-devise_for :doctors, :users
+devise_for :users
 root "pages#home"
-get "doctors" => "doctors#index"
 get "about" => "pages#about"
 get 'users/:id' => 'users#show'
   # The priority is based upon order of creation: first created -> highest priority.
