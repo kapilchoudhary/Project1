@@ -9,20 +9,33 @@ $jumbotron-bg: #bdc3c7;
 @import 'bootstrap';
 
 .center 
-	{
-	text-align: center; 
-	}
+    {
+    text-align: center; 
+    }
 
-.checkbox input[type="checkbox"]
-	{
-		margin-left: 0;
-	}
-table td
+.right
 {
-	width: 5%;
+    float: right;
 }
 
-.round-image-50 {
+.left 
+{
+    float: left;
+    margin-top: 5px
+  
+}
+
+.checkbox input[type="checkbox"]
+    {
+        margin-left: 0;
+    }
+table td
+{
+    width: 5%;
+}
+
+.round-image-50 
+{
     background-color: white;
     border: 1px solid #d9d9d9;
     border-radius: 25px;
@@ -34,3 +47,5 @@ table td
     text-align: center;
     img { width: 100% }
 }
+
+

@@ -1,11 +1,33 @@
-<div class="jumbotron center">
+<div class= center>
 	<h1>Welcome to EirMD</h1>
 	
 <% if user_signed_in? %>
 	The Doctor will be with you shortly
 	<%else %>
-	<p><%=link_to " New Patients Click Here!",new_user_registration_path, class: "btn btn-primary btn-lg"%></p>
-	<% end %>
-
+	<div class="table">
+  		<div class="col-sm-6 col-md-6 left">
+    		<div class="thumbnail">
+     		<%= image_tag("http://prestigefamilydentistry.com/wp-content/uploads/2012/08/Stock-Smile-03.png", :alt => "rss feed") %>
+      			<div class="caption">
+        	<h3>New Patients</h3>
+        	<p>Stuck at home? Just need a check up? Sign up here!</p>
+        	<p><%=link_to " New Patients Click Here!",new_user_registration_path, class: "btn btn-primary btn-lg"%></p>
+      		</div>
+    	</div>
+  		</div>
+	</div>
+	<div class="table">
+  		<div class="col-sm-6 col-md-6 right">
+    		<div class="thumbnail">
+     		<%= image_tag("http://www.benin2009.com/file/2014/06/a-few-helpful-doctors-ready-to-excuse-you.jpg", :alt => "rss feed") %>
+      			<div class="caption">
+        	<h3>Healthcare Professionals</h3>
+        	<p>Looking to grow your practice? Try something new?</p>
+        	<p><%=link_to " Start your Practice!",new_user_registration_path, class: "btn btn-primary btn-lg"%></p>
+      		</div>
+    	</div>
+  		</div>
+	</div>
+<% end %>
 
 </div>

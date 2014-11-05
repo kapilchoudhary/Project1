@@ -9,10 +9,15 @@ gem 'bootstrap-sass'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'devise', '~> 3.4.0'
 gem 'annotate'
-gem 'paperclip', "~> 3.0"
+gem 'paperclip', '~> 3.0'
+gem 'aws-sdk', '~> 1.20.0'
+gem 'masonry-rails', '~> 0.2.0'
+
+
 
 group :development, :test do
 	gem 'railroady'
@@ -29,3 +34,4 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
+

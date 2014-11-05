@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<td class="round-image-20"><%= image_tag(current_user.avatar.url(:medium)) %></td>
+<br>
+<br>
 <p>
   <strong>Name:</strong>
   <%= @profile.name %>
