@@ -22,14 +22,26 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
- 
- has_one :profile
- accepts_nested_attributes_for :profile
 
- has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
- validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  has_one :profile
+  accepts_nested_attributes_for :profile
 
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
+  after_create :create_user_profile
 
+  def is_doctor?
+    self.profile_type == Profile::DOCTOR
+  end
 
+  def is_patient?
+    self.profile_type == Profile::PATIENT
+  end
+
+  private
+
+  def create_user_profile
+    self.build_profile.save(:validate => false)
+  end
 end

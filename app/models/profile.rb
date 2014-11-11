@@ -20,5 +20,20 @@ class Profile < ActiveRecord::Base
 
 	validates :name, presence: true 
 	validates :city, presence: true
-	validates :speciality, presence: true
+	#validates :speciality, presence: true
+
+  has_one :doctor_profile
+  has_one :patient_profile
+  accepts_nested_attributes_for :doctor_profile
+  accepts_nested_attributes_for :patient_profile
+
+  delegate :speciality, :gratuate_school, :degree, :professional_license,
+           :year_of_completion, to: :doctor_profile, :prefix => true
+  
+  delegate :profile_type, to: :user, :prefix => true
+
+  DOCTOR = 'doctor'
+  PATIENT = 'patient'
+  TYPES = [DOCTOR, PATIENT]
+
 end

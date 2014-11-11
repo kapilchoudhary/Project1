@@ -1,0 +1,53 @@
+<%= f.fields_for :patient_profile do |doc| %>
+  <div class="dropdown">
+    <%= doc.label :gender  %><br>
+    <%= doc.text_field :gender %>
+  </div>
+
+  <div class="dropdown">
+    <%= doc.label :date_of_birth %><br>
+    <%= doc.text_field :date_of_birth %>
+  </div>
+
+  <div class="dropdown">
+    <%= doc.label :location %><br>
+    <%= doc.text_field :location %>
+  </div>
+
+  <%= doc.fields_for :allergy do |a| %>
+    <div class="dropdown">
+      <%= a.label :name, 'Allergy' %><br>
+      <%= a.text_field :name %>
+    </div>
+
+    <div class="dropdown">
+      <%= a.label :note, 'Allergy Note' %><br>
+      <%= a.text_area :note %>
+    </div>
+  <% end %>
+
+  <%= doc.fields_for :medication do |m| %>
+    <div class="dropdown">
+      <%= m.label :name, 'Medication' %><br>
+      <%= m.text_field :name %>
+    </div>
+
+    <div class="dropdown">
+      <%= m.label :note, 'Medication Note' %><br>
+      <%= m.text_area :note %>
+    </div>
+  <% end %>
+
+  <%= doc.fields_for :previous_dignosed_condition do |dc| %>
+    <div class="dropdown">
+      <%= dc.label :name, 'Dignosed Condition' %><br>
+      <%= dc.text_field :name %>
+    </div>
+
+    <div class="dropdown">
+      <%= dc.label :note, 'Dignosed Condition Note' %><br>
+      <%= dc.text_area :note %>
+    </div>
+  <% end %>
+
+<% end %>

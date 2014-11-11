@@ -1,28 +1,33 @@
 Rails.application.routes.draw do
 
-resources :profiles
-devise_for :users, :skip => [:registrations] , :controllers => {:registartions => "users/registartions"}
+  resources :profiles, except: [:edit] do
+    collection do
+      get :edit
+    end
+  end
+   
+  devise_for :users, :skip => [:registrations] , :controllers => {:registartions => "users/registartions"}
 
-devise_scope :user do
-  get  'users/sign_up' => 'users/registrations#new'
-  get  'users/:id/edit' => 'users/registrations#edit'
-  
-  # routes for doctor registration/ edit doctors
-  get  'doctors/sign_up' => 'users/registrations#new_doctor', :as => 'new_doctor_registration'
-  post 'doctors' => 'users/registrations#create', :as => 'doctor_registration'
-  get 'doctors/edit' => 'users/registrations#edit_doctor', as: :edit_doctor_registration
-  put 'doctors' => 'users/registrations#update'
+  devise_scope :user do
+    get  'users/sign_up' => 'users/registrations#new'
+    get  'users/:id/edit' => 'users/registrations#edit'
+    
+    # routes for doctor registration/ edit doctors
+    get  'doctors/sign_up' => 'users/registrations#new_doctor', :as => 'new_doctor_registration'
+    post 'doctors' => 'users/registrations#create', :as => 'doctor_registration'
+    get 'doctors/edit' => 'users/registrations#edit_doctor', as: :edit_doctor_registration
+    put 'doctors' => 'users/registrations#update'
 
-  # routes for patient registration/ edit patients
-  get  'patients/sign_up' => 'users/registrations#new_patient', :as => 'new_patient_registration'
-  post 'patients' => 'users/registrations#create', :as => 'patient_registration'
-  get  'patients/edit' => 'users/registrations#edit_patient', :as => 'edit_patient_registration'
-  put  'patients' => 'users/registrations#update'
-end
+    # routes for patient registration/ edit patients
+    get  'patients/sign_up' => 'users/registrations#new_patient', :as => 'new_patient_registration'
+    post 'patients' => 'users/registrations#create', :as => 'patient_registration'
+    get  'patients/edit' => 'users/registrations#edit_patient', :as => 'edit_patient_registration'
+    put  'patients' => 'users/registrations#update'
+  end
 
-root "pages#home"
-get "about" => "pages#about"
-get 'users/:id' => 'users#show'
+  root "pages#home"
+  get "about" => "pages#about"
+  get 'users/:id' => 'users#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -12,12 +12,33 @@
   <strong>City:</strong>
   <%= @profile.city %>
 </p>
+<% if current_user.is_doctor?%>
+  <div id="doctor">
+    <p>
+      <strong>Speciality:</strong>
+      <%= @profile.doctor_profile_speciality %>
+    </p>
+    <p>
+      <strong>Gratuate School:</strong>
+      <%= @profile.doctor_profile_gratuate_school %>
+    </p>
+    <p>
+      <strong>Degree:</strong>
+      <%= @profile.doctor_profile_degree %>
+    </p>
 
-<p>
-  <strong>Speciality:</strong>
-  <%= @profile.speciality %>
-</p>
+    <p>
+      <strong>Graduated At:</strong>
+      <%= @profile.doctor_profile_year_of_completion %>
+    </p>
+
+    <p>
+      <strong>Professional License:</strong>
+      <%= @profile.doctor_profile_professional_license %>
+    </p>
+  </div>
+<% end %>
 <% if @profile.user == current_user %>
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Edit', edit_profiles_path %> |
 <% end %>
 <%= link_to 'Back', profiles_path %>

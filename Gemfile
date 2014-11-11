@@ -16,17 +16,16 @@ gem 'annotate'
 gem 'paperclip', '~> 3.0'
 gem 'aws-sdk', '~> 1.20.0'
 gem 'masonry-rails', '~> 0.2.0'
-
-
+gem "nested_form"
+gem 'pg'
 
 group :development, :test do
 	gem 'railroady'
-	gem 'sqlite3'
 	gem 'byebug'
+  gem 'pry-rails'
 end
 
 group :production do
-	gem 'pg'
 	gem 'rails_12factor'
 end
 

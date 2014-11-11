@@ -1,0 +1,26 @@
+<%= f.fields_for :doctor_profile do |doc| %>
+  <div class="dropdown">
+    <%= doc.label :speciality  %><br>
+    <%= doc.text_field :speciality %>
+  </div>
+
+  <div class="dropdown">
+    <%= doc.label :gratuate_school %><br>
+    <%= doc.text_field :gratuate_school %>
+  </div>
+
+  <div class="dropdown">
+    <%= doc.label :degree %><br>
+    <%= doc.text_field :degree %>
+  </div>
+
+  <div class="dropdown">
+    <%= doc.label :professional_license %><br>
+    <%= doc.text_field :professional_license %>
+  </div>
+
+  <div class="dropdown">
+    <%= doc.label :year_of_completion %><br>
+    <%= doc.text_field :year_of_completion %>
+  </div>
+<% end %>

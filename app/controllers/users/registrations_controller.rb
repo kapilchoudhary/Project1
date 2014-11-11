@@ -2,32 +2,32 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   before_filter :disable_simple_signup, only: [:new]
 
+  # This action will redirect to home page
   def new
 
   end
   
   # This action is to create new doctor
   def new_doctor
-    session[:user] ||= { }
-   # session[:user]['role'] = :doctor
-    @user = build_resource(session[:user])
-    
+    session[:user_type] = Profile::DOCTOR
+    @user = build_resource
+
     render 'new_doctor'
   end
 
   # This action is to create new patient
   def new_patient
-    session[:user] ||= { }
-   # session[:user]['role'] = :patient
-    @user = build_resource(session[:user])
-    
+    session[:user_type] = Profile::PATIENT
+    @user = build_resource
+
     render 'new_patient'
   end
 
   # This action will register doctor and patient both
   def create
     build_resource(sign_up_params)
-    
+
+    resource.profile_type = session[:user_type]
     if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
@@ -40,13 +40,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords resource
-      render 'users/registrations/new_patient'
+      render 'users/registrations/new_'.concat(session[:user_type])
     end
   end
 
   # This action will update doctor and patient both
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
@@ -59,16 +60,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
       respond_with resource, location: after_update_path_for(resource)
     else
       clean_up_passwords resource
-      render 'users/registrations/edit_patient'
+      render 'users/registrations/edit_'.concat(resource.profile_type)
     end
   end
-  
-  # to open 
+
+  # Render patient edit page
   def edit_patient
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     render 'users/registrations/edit_patient'
   end
 
+  # Render doctor edit page
   def edit_doctor
     render 'users/registrations/edit_doctor'
   end

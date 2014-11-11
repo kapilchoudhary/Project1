@@ -23,6 +23,14 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    if current_user.is_doctor?
+      @profile.build_doctor_profile unless @profile.doctor_profile
+    else
+      patient_profile = @profile.patient_profile || @profile.build_patient_profile 
+      patient_profile.try(:allergy) || patient_profile.build_allergy
+      patient_profile.try(:medication) || patient_profile.build_medication
+      patient_profile.try(:previous_dignosed_condition) || patient_profile.build_previous_dignosed_condition
+    end
   end
 
   def create
@@ -47,16 +55,23 @@ class ProfilesController < ApplicationController
   end
 
   def correct_user
-      @profile = current_user.profile(id: params[:id])
-      redirect_to profiles_path, notice: "Not authorized to edit this profile." if @profile.nil?
-    end
+    @profile = current_user.profile(id: params[:id])
+    redirect_to profiles_path, notice: "Not authorized to edit this profile." if @profile.nil?
+  end
 
   private
-    def set_profile
-      @profile = Profile.find(params[:id])
-    end
+  def set_profile
+    @profile = current_user.profile
+  end
 
-    def profile_params
-      params.require(:profile).permit(:name, :city, :speciality, :image)
+  def profile_params
+    if current_user.is_doctor?
+      params.require(:profile).permit(:name, :city, :state, :image, doctor_profile_attributes: [:profile_id, :speciality,                                :gratuate_school, :degree, :professional_license])
+    else
+      params.require(:profile).permit(:name, :city, :state, :image, 
+                                      patient_profile_attributes: [:profile_id, :gender,:date_of_birth, :location, 
+                                      allergy_attributes: [:name, :note], medication_attributes: [:name, :note], 
+                                      previous_dignosed_condition_attributes: [:name, :note] ])
     end
+  end
 end
