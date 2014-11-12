@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :complete_profile_info, only: [:show, :index]
   before_action :correct_user, only: [:edit, :update, :destroy]
   respond_to :html, :xml, :json
 
@@ -79,5 +80,9 @@ class ProfilesController < ApplicationController
                                       allergy_attributes: [:name, :note], medication_attributes: [:name, :note], 
                                       previous_dignosed_condition_attributes: [:name, :note] ])
     end
+  end
+
+  def complete_profile_info
+    redirect_to edit_profiles_path, notice: "Please complete your profile first!." unless current_user.profile_completed?
   end
 end
