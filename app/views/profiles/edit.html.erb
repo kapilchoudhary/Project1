@@ -1,37 +1,40 @@
-<h1>Editing profile</h1>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1>Editing profile</h1>
+	</div>
+	<div class="panel-body">
+	  <%= nested_form_for(@profile, :url => profile_path(@profile)) do |f| %>
+      <% if @profile.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
 
-<%= nested_form_for(@profile, :url => profile_path(@profile)) do |f| %>
-  <% if @profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-
-      <ul>
-      <% @profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @profile.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
+      <div class="form-group col-sm-6">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
+      <div class="form-group col-sm-6">
+        <%= f.label :city %><br>
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
-  <%= render partial: current_user.profile_type.concat('_profile_fields'), locals: {:f => f} %>
-  <br>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      <div class="form-group col-sm-6">
+        <%= f.label :state %><br>
+        <%= select_tag 'State', options_for_select(us_states),:name=>"profile[state]",:id=>"state", class: "form-control"%>
+        
+      </div>
+        <%= render partial: current_user.profile_type.concat('_profile_fields'), locals: {:f => f} %>
+      <br>
+      <div class="form-group">
+        <%= f.submit "Update", class: "btn btn-primary" %></div>
 <% end %>
 
 <%= link_to 'Show', @profile %> |

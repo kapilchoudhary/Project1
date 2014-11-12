@@ -13,33 +13,57 @@
   <%= @profile.city %>
 </p>
 
+<p>
+  <strong>State:</strong>
+  <%= @profile.state %>
+</p>
+
 <% if current_user || ( @profile || current_user.is_doctor? ) %>
-  <div id="doctor">
-    <p>
-      <strong>Speciality:</strong>
-      <%= @profile.doctor_profile_speciality %>
-    </p>
-    <p>
-      <strong>Gratuate School:</strong>
-      <%= @profile.doctor_profile_gratuate_school %>
-    </p>
-    <p>
-      <strong>Degree:</strong>
-      <%= @profile.doctor_profile_degree %>
-    </p>
 
-    <p>
-      <strong>Graduated At:</strong>
-      <%= @profile.doctor_profile_year_of_completion %>
-    </p>
+  <% if @profile.doctor_profile%>
+    <div id="doctor">
+      <p>
+        <strong>Speciality:</strong>
+        <%= @profile.doctor_profile_speciality %>
+      </p>
+      <p>
+        <strong>Gratuate School:</strong>
+        <%= @profile.doctor_profile_gratuate_school %>
+      </p>
+      <p>
+        <strong>Degree:</strong>
+        <%= @profile.doctor_profile_degree %>
+      </p>
 
-    <p>
-      <strong>Professional License:</strong>
-      <%= @profile.doctor_profile_professional_license %>
-    </p>
-  </div>
+      <p>
+        <strong>Graduated At:</strong>
+        <%= @profile.doctor_profile_year_of_completion %>
+      </p>
+
+      <p>
+        <strong>Professional License:</strong>
+        <%= @profile.doctor_profile_professional_license %>
+      </p>
+    </div>
+  <% end %>
+<% else %>
+	<p>
+	  <strong>Gender:</strong>
+	  <%= @profile.patient_profile.gender %>
+	</p>
+	
+	<p>
+	  <strong>Date of Birth:</strong>
+	  <%= date_format(@profile.try(:patient_profile).try(:date_of_birth)) %>
+	</p>
+
+	<p>
+	  <strong>Location:</strong>
+	  <%= @profile.patient_profile.location %>
+	</p>
+			
 <% end %>
 <% if @profile.user == current_user %>
-<%= link_to 'Edit', edit_profiles_path %> |
+  <%= link_to 'Edit', edit_profiles_path %> |
 <% end %>
 <%= link_to 'Back', profiles_path %>
