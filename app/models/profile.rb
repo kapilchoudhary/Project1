@@ -20,7 +20,6 @@ class Profile < ActiveRecord::Base
 
 	validates :name, presence: true 
 	validates :city, presence: true
-	#validates :speciality, presence: true
 
   has_one :doctor_profile
   has_one :patient_profile

@@ -44,4 +44,12 @@ class DoctorProfile < ActiveRecord::Base
 				'Transfusion Medicine', 'Travel Medicine', 'Undersea and Hyperbaric Medicine', 'Urgent Care', 
 				'Urology', 'Urology - Oncology', 'Wilderness Medicine', 'Wound care']
 
+
+  validates :speciality, presence: true
+  validates :degree, presence: true
+  validates :professional_license, presence: true
+  validates :year_of_completion, presence: true
+  
+  DEGREES = ['D', 'MDCM', 'DO', 'MBBS', 'MBChB', 'DMD', 'DDS', 'DPM', 'EdD', 'PsyD', 'PhD', 'PharmD']
+
 end

@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     self.profile_type == Profile::PATIENT
   end
   
+  def profile_completed?
+    profile.try(:doctor_profile) || profile.try(:patient_profile)
+  end
+  
   private
 
   def create_user_profile
