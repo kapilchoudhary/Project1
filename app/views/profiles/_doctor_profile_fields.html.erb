@@ -1,26 +1,27 @@
 <%= f.fields_for :doctor_profile do |doc| %>
-  <div class="dropdown">
+
+  <div class="form-group col-sm-6">
     <%= doc.label :speciality  %><br>
-    <%= doc.text_field :speciality %>
+    <%= doc.collection_select :speciality, DoctorProfile::SPECIALITY, :to_s, :to_s, {:include_blank => false}, {:class  => 'form-control'} %>
   </div>
 
-  <div class="dropdown">
+  <div class="form-group col-sm-6">
     <%= doc.label :gratuate_school %><br>
-    <%= doc.text_field :gratuate_school %>
+    <%= doc.text_field :gratuate_school, class: "form-control" %>
   </div>
 
-  <div class="dropdown">
+  <div class="form-group col-sm-6">
     <%= doc.label :degree %><br>
-    <%= doc.text_field :degree %>
+    <%= doc.collection_select :degree, DoctorProfile::DEGREES, :to_s, :to_s, {:include_blank => false}, {:class  => 'form-control'}  %>
   </div>
 
-  <div class="dropdown">
+  <div class="form-group col-sm-6">
     <%= doc.label :professional_license %><br>
-    <%= doc.text_field :professional_license %>
+    <%= doc.text_field :professional_license, class: "form-control" %>
   </div>
 
-  <div class="dropdown">
+  <div class="form-group col-sm-6">
     <%= doc.label :year_of_completion %><br>
-    <%= doc.text_field :year_of_completion %>
+    <%= doc.collection_select :year_of_completion, (1914..Time.now.year).to_a, :to_s, :to_s, {:include_blank => false}, {:class  => 'form-control'}  %>
   </div>
 <% end %>
