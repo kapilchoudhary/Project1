@@ -22,6 +22,6 @@
 
   <div class="form-group col-sm-6">
     <%= doc.label :year_of_completion %><br>
-    <%= doc.collection_select :year_of_completion, (1914..Time.now.year).to_a, :to_s, :to_s, {:include_blank => false}, {:class  => 'form-control'}  %>
+    <%= doc.collection_select :year_of_completion, (1914..2014).to_a, :to_s, :to_s, {:include_blank => false}, {:class  => 'form-control'}  %>
   </div>
 <% end %>
