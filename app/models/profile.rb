@@ -36,4 +36,7 @@ class Profile < ActiveRecord::Base
   PATIENT = 'patient'
   TYPES = [DOCTOR, PATIENT]
 
+  def self.doctors
+    self.joins(:user).where("users.profile_type = ?", DOCTOR)
+  end
 end

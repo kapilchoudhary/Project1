@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   def is_patient?
     self.profile_type == Profile::PATIENT
   end
-
+  
   private
 
   def create_user_profile

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<td class="round-image-20"><%= image_tag(current_user.avatar.url(:medium)) %></td>
+<td class="round-image-20"><%= image_tag((current_user || @profile.user).avatar.url(:medium)) %></td>
 <br>
 <br>
 <p>
@@ -12,7 +12,8 @@
   <strong>City:</strong>
   <%= @profile.city %>
 </p>
-<% if current_user.is_doctor?%>
+
+<% if current_user || ( @profile || current_user.is_doctor? ) %>
   <div id="doctor">
     <p>
       <strong>Speciality:</strong>

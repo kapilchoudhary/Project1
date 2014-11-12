@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    @profiles = Profile.all
+    @profiles = Profile.doctors
     respond_with(@profile)
   end
 
@@ -60,8 +60,13 @@ class ProfilesController < ApplicationController
   end
 
   private
+
   def set_profile
-    @profile = current_user.profile
+    unless current_user
+      @profile = Profile.find(params[:id])
+    else 
+      @profile = current_user.profile
+    end
   end
 
   def profile_params
