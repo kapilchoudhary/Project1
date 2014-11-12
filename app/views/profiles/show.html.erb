@@ -19,7 +19,6 @@
 </p>
 
 <% if current_user || ( @profile || current_user.is_doctor? ) %>
-
   <% if @profile.doctor_profile%>
     <div id="doctor">
       <p>
@@ -47,21 +46,22 @@
     </div>
   <% end %>
 <% else %>
-	<p>
-	  <strong>Gender:</strong>
-	  <%= @profile.patient_profile.gender %>
-	</p>
-	
-	<p>
-	  <strong>Date of Birth:</strong>
-	  <%= date_format(@profile.try(:patient_profile).try(:date_of_birth)) %>
-	</p>
+	<% if @profile.client_profile%>
+    <p>
+      <strong>Gender:</strong>
+      <%= @profile.patient_profile.gender %>
+    </p>
+    
+    <p>
+      <strong>Date of Birth:</strong>
+      <%= date_format(@profile.try(:patient_profile).try(:date_of_birth)) %>
+    </p>
 
-	<p>
-	  <strong>Location:</strong>
-	  <%= @profile.patient_profile.location %>
-	</p>
-			
+    <p>
+      <strong>Location:</strong>
+      <%= @profile.patient_profile.location %>
+    </p>
+  <% end %>
 <% end %>
 <% if @profile.user == current_user %>
   <%= link_to 'Edit', edit_profiles_path %> |
