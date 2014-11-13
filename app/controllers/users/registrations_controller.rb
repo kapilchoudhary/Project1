@@ -60,7 +60,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       respond_with resource, location: after_update_path_for(resource)
     else
       clean_up_passwords resource
-      render 'users/registrations/edit_'.concat(resource.profile_type)
+      render template: 'users/registrations/edit_'.concat(resource.profile_type)
     end
   end
 

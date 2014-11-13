@@ -83,6 +83,8 @@ class ProfilesController < ApplicationController
   end
 
   def complete_profile_info
-    redirect_to edit_profiles_path, notice: "Please complete your profile first!." unless current_user.profile_completed?
+    if current_user
+      redirect_to edit_profiles_path, notice: "Please complete your profile first!." unless current_user.profile_completed?
+    end
   end
 end
