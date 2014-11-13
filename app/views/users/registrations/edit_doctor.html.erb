@@ -6,7 +6,6 @@
   </div>
   <div class="panel-body">
     <%= form_for(current_user, :as => :user, :url => doctor_registration_path, :html => { :method => :put }) do |f| %>
-      <%= devise_error_messages! %>
     
       <div class="form-group">
         <%= f.label :avatar %>
