@@ -3,11 +3,18 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :complete_profile_info, only: [:show, :index]
   before_action :correct_user, only: [:edit, :update, :destroy]
-  respond_to :html, :xml, :json
+  respond_to :html, :xml, :json, :js
 
   def index
-    @profiles = Profile.doctors
-    respond_with(@profile)
+    if params[:search]
+      @profiles = Profile.search(params[:search])
+      respond_to do |format|
+        format.js 
+      end  
+    else
+      @profiles = Profile.doctors
+      respond_with(@profile)
+    end
   end
 
   def show
@@ -38,7 +45,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.create({
         name: params['profile']['name'],
         speciality: params['profile']['speciality'],
-        city: params['profile']['speciality'],
+        city: params['profile']['city'],
         user_id: current_user['id']
       })
     @profile.save

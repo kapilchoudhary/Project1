@@ -38,4 +38,11 @@ class Profile < ActiveRecord::Base
   def self.doctors
     self.joins(:user).where("users.profile_type = ?", DOCTOR)
   end
+
+  def self.search(search)
+    if search
+      doctors.where('city LIKE ? OR state LIKE ?', "%#{search}%", "%#{search}%") 
+    end
+  end
+
 end

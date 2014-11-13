@@ -16,3 +16,9 @@
 //= require turbolinks
 //= require jquery_nested_form
 //= require_tree .
+$(function () {
+  $('#profiles th a').live('click', function () {
+    $.getScript(this.href);
+    return false;
+  });
+})
