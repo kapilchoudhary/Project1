@@ -11,6 +11,8 @@
           <th>Name <br></th>
           <th>City <br></th>
           <th>State <br></th>
+          <th>Degree <br></th>
+          <th>Speciality <br></th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -21,10 +23,12 @@
             <td><%= profile.name %></td>
             <td><%= profile.city %></td>
             <td><%= profile.state %></td>
-            <td><%#= profile.location %></td>
+            <td><%= profile.doctor_profile.try(:degree) %></td>
+            <td><%= profile.doctor_profile.try(:speciality) %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
 </div>
+

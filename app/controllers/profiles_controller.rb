@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   respond_to :html, :xml, :json, :js
 
+  # action returns list of all doctors , plus filterd doctors by city, state etc
   def index
     if params[:search]
       @profiles = Profile.search(params[:search])
@@ -17,10 +18,12 @@ class ProfilesController < ApplicationController
     end
   end
 
+  # Display doctor or patient profile
   def show
     respond_with(@profile)
   end
 
+  # Render create new profile page. we need to remove this as we create blank user profile on user creation.
   def new
     if current_user.profile.nil?
       @profile = Profile.new 
@@ -30,6 +33,7 @@ class ProfilesController < ApplicationController
     end
   end
 
+  # To edit Doctor/Patient profile info. 
   def edit
     if current_user.is_doctor?
       @profile.build_doctor_profile unless @profile.doctor_profile
@@ -41,6 +45,7 @@ class ProfilesController < ApplicationController
     end
   end
 
+  # To create new profile,we don't need this too. will need to remove it.
   def create
     @profile = Profile.create({
         name: params['profile']['name'],
@@ -52,11 +57,13 @@ class ProfilesController < ApplicationController
     respond_with(@profile)
   end
 
+  # To update user profile.
   def update
     @profile.update(profile_params)
     respond_with(@profile)
   end
 
+  # This is to destroy user profile. I think we don't need this as each user should have a profile.
   def destroy
     @profile.destroy
     respond_with(@profile)
