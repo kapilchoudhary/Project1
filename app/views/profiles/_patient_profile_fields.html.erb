@@ -12,19 +12,16 @@
   </div>
 
   <div class="form-group col-sm-6">
-    <%= doc.label :location %><br>
+    <%= doc.label :address %><br>
     <%= doc.text_field :location, :class => "form-control" %>
   </div>
 
-  <%= doc.fields_for :allergy do |a| %>
+  <%= doc.fields_for :Allergies do |a| %>
     <div class="form-group col-sm-6">
-      <%= a.label :name, 'Allergy' %><br>
+      <%= a.label :name, 'Allergies' %><br>
       <%= a.text_field :name, :class => "form-control" %>
-    </div>
-
-    <div class="form-group col-sm-6">
-      <%= a.label :note, 'Allergy Note' %><br>
-      <%= a.text_area :note %>
+      <%= a.label :note, 'Allergies Note' %><br>
+      <%= a.text_area :note, class: "form-control" %>
     </div>
   <% end %>
 
@@ -32,9 +29,6 @@
     <div class="form-group col-sm-6">
       <%= m.label :name, 'Medication' %><br>
       <%= m.text_field :name, :class => "form-control" %>
-    </div>
-
-    <div class="form-group col-sm-6">
       <%= m.label :note, 'Medication Note' %><br>
       <%= m.text_area :note, :class => "form-control" %>
     </div>
@@ -44,9 +38,6 @@
     <div class="form-group col-sm-6">
       <%= dc.label :name, 'Diagnosed Condition' %><br>
       <%= dc.text_field :name, :class => "form-control" %>
-    </div>
-
-    <div class="form-group col-sm-6">
       <%= dc.label :note, 'Diagnosed Condition Note' %><br>
       <%= dc.text_area :note, :class => "form-control" %>
     </div>

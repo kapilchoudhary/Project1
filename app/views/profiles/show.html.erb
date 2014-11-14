@@ -45,8 +45,9 @@
       </p>
     </div>
   <% end %>
-<% else %>
-	<% if @profile.client_profile%>
+<% end %>
+<% if current_user || ( @profile || current_user.is_patient? ) %>
+	<% if @profile.patient_profile%>
     <p>
       <strong>Gender:</strong>
       <%= @profile.patient_profile.gender %>

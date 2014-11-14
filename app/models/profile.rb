@@ -14,8 +14,8 @@
 #
 
 class Profile < ActiveRecord::Base
-	belongs_to :user
-
+  
+  belongs_to :user
 	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => '/images/:style/missing.png'
 
 	validates :name, presence: true 
@@ -47,4 +47,5 @@ class Profile < ActiveRecord::Base
                    OR doctor_profiles.speciality LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%") 
     end
   end
+  
 end
