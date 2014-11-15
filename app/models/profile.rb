@@ -21,6 +21,7 @@ class Profile < ActiveRecord::Base
 	validates :name, presence: true 
 	validates :city, presence: true
 
+  has_one :stripe_access_cred, through: :doctor_profile
   has_one :doctor_profile
   has_one :patient_profile
   accepts_nested_attributes_for :doctor_profile

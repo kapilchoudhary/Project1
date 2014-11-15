@@ -20,6 +20,7 @@ class ProfilesController < ApplicationController
 
   # Display doctor or patient profile
   def show
+    @stripe_client_id = ENV['CLIENT_ID'] || 'ca_58jk2z8gQyQFKipXeCrMKzhDtbk8aPKr'
     respond_with(@profile)
   end
 

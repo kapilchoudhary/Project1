@@ -25,6 +25,13 @@ Rails.application.routes.draw do
     put  'patients' => 'users/registrations#update'
   end
 
+  resources :payments, only: [:new] do
+    collection do
+      get :access_setup
+      post :transaction_fees
+    end
+  end
+
   root "pages#home"
   get "about" => "pages#about"
   get 'users/:id' => 'users#show'
