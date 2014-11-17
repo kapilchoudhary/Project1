@@ -15,9 +15,11 @@
 //= require bootstrap
 //= require turbolinks
 //= require jquery_nested_form
+//= require payments
 //= require_tree .
+
 $(function () {
-  $('#profiles th a').live('click', function () {
+  $('#profiles th a').on('click', function () {
     $.getScript(this.href);
     return false;
   });
