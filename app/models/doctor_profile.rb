@@ -9,7 +9,7 @@ class DoctorProfile < ActiveRecord::Base
   validates :professional_license, presence: true
   validates :year_of_completion, presence: true
 
-  DEGREES = ['M.D.', 'D.O.', 'M.D', 'M.D. PhD']
+  DEGREES = ['M.D.', 'D.O.', 'M.D. PhD']
   SPECIALITY = ['Addiction Medicine', 'ADHD and Autism', 'Aesthetic Medicine', 'Anesthesiology',
                 'Anti-Aging Medicine', 'Bariatrics', 'Cardiology - Cardiac Electrophysiology',
                 'Clinical Genetics', 'Clinical Lipidology', 'Clinical Psychology', 
