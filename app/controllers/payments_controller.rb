@@ -11,7 +11,7 @@ class PaymentsController < ApplicationController
       @stripe_client_id = ENV['CLIENT_ID']
       @pendind_permissions = current_user.try(:profile).try(:doctor_profile).stripe_access_creds.where(:access_token => nil)
       @received_payments = current_user.try(:profile).try(:doctor_profile).stripe_access_creds.where(:paid => true)
-      @pendind_payments = current_user.try(:profile).try(:doctor_profile).stripe_access_creds.where("access_token IS NOT NULL")
+      @pending_payments = current_user.try(:profile).try(:doctor_profile).stripe_access_creds.where("access_token IS NOT NULL")
       render 'doctors_payment'
     elsif current_user.is_patient?
       @ready_for_payments = current_user.stripe_access_creds.where("access_token IS NOT NULL AND paid =?", false)

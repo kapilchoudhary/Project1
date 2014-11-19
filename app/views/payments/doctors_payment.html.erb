@@ -16,9 +16,8 @@
 <% end %>
 
 <h1></h1>
-@pendind_payments
 
-<% @pendind_payments.each do |payment|%>
+<% @pending_payments.each do |payment|%>
   <div>
     From: <%= payment.try(:patient).try(:profile).try(:name) %>
   </div>
