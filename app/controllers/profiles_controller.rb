@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
         format.js 
       end  
     else
-      @profiles = Profile.doctors
+      @profiles = Profile.doctors.active
       respond_with(@profile)
     end
   end

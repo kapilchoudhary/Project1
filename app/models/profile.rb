@@ -41,6 +41,10 @@ class Profile < ActiveRecord::Base
   def self.doctors
     self.joins(:user).where("users.profile_type = ?", DOCTOR)
   end
+  
+  def self.doctors
+    self.joins(:doctor_profile).where("doctor_profiles.status = ?", true)
+  end
 
   # this method filters the doctors by city, state , degree and speciality
   def self.search(search)
