@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     self.profile_type == Profile::DOCTOR
   end
 
+  def is_admin?
+    self.profile_type == Profile::ADMIN
+  end
+
   def is_patient?
     self.profile_type == Profile::PATIENT
   end

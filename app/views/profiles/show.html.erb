@@ -1,5 +1,12 @@
+<% if @profile.doctor_profile%>
+  <h3>Doctor Profile's Info</h3>
+<% else %> 
+  <strong>Patient Profile's Info</strong>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 </br>
+
 <td class="round-image-20"><%= image_tag((current_user || @profile.user).avatar.url(:medium)) %></td>
 <br>
 <br>

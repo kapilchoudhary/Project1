@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      <h1>Your Doctors</h1>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Name <br></th>
+          <th>City <br></th>
+          <th>State <br></th>
+          <th>Degree <br></th>
+          <th>Speciality <br></th>
+          <th>Active <br></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @profiles.each do |profile| %>
+          <tr>
+            <td><%= profile.name %></td>
+            <td><%= profile.city %></td>
+            <td><%= profile.state %></td>
+            <td><%= profile.doctor_profile.try(:degree) %></td>
+            <td><%= profile.doctor_profile.try(:speciality) %></td>
+            <td><%= check_box_tag :status, value = profile.doctor_profile.try(:id), checked = profile.doctor_profile.try(:status), { :class => "permission" } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".permission").click(function(){
+	    var status = this.checked ? 1 : 0;
+	    $.ajax({
+	      url: '/admin/set_permission',
+	      type: 'PUT',
+	      data: {"profile_id": this.value , "status": this.checked }
+	    });
+		});
+	});
+</script>

@@ -34,17 +34,22 @@ class Profile < ActiveRecord::Base
 
   DOCTOR = 'doctor'
   PATIENT = 'patient'
-  TYPES = [DOCTOR, PATIENT]
+  ADMIN = "admin"
+  TYPES = [DOCTOR, PATIENT, ADMIN]
 
   # This method returns all doctor profiles
   def self.doctors
     self.joins(:user).where("users.profile_type = ?", DOCTOR)
   end
 
+  def self.active
+    self.joins(:user).where("users.status = ?", true)
+  end
+
   # this method filters the doctors by city, state , degree and speciality
   def self.search(search)
     if search
-      doctors.joins(:doctor_profile).where('city LIKE ? OR state LIKE ? OR doctor_profiles.degree LIKE ?
+      doctors.active.joins(:doctor_profile).where('city LIKE ? OR state LIKE ? OR doctor_profiles.degree LIKE ?
                    OR doctor_profiles.speciality LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%") 
     end
   end

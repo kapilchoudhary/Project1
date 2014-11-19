@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'admin/index'
+  put 'admin/set_permission'
+
   resources :profiles, except: [:edit] do
     collection do
       get :edit
@@ -39,6 +42,7 @@ Rails.application.routes.draw do
   root "pages#home"
   get "about" => "pages#about"
   get 'users/:id' => 'users#show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
