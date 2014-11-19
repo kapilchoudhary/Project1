@@ -42,7 +42,7 @@ class Profile < ActiveRecord::Base
     self.joins(:user).where("users.profile_type = ?", DOCTOR)
   end
   
-  def self.doctors
+  def self.active
     self.joins(:doctor_profile).where("doctor_profiles.status = ?", true)
   end
 
