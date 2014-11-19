@@ -9,6 +9,9 @@
     <%= label_tag :card_code, "Security Code on Card (CVV)" %>
     <%= text_field_tag :card_code, nil, name: nil %>
   </div>
+
+  <%= hidden_field_tag :payment_id, params[:payment_id] %>
+
   <div class="field">
     <%= label_tag :card_month, "Card Expiration" %>
     <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>

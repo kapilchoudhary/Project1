@@ -1,9 +1,4 @@
 <p id="notice"><%= notice %></p>
-<% if current_user || ( @profile || current_user.is_doctor? ) %>
-  <% if @profile.doctor_profile%>
-    <%= link_to "Stripe Pay", "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=#{@stripe_client_id}&scope=read_write" %>
-  <% end %>
-<% end %>
 </br>
 <td class="round-image-20"><%= image_tag((current_user || @profile.user).avatar.url(:medium)) %></td>
 <br>

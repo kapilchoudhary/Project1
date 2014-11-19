@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+</br>
+<% unless current_user ==  @profile.user%>
+  <%= link_to 'Request to doctor', initiate_payment_payments_path(doctor_id: @profile), method: :put %>
+<% end %>
+<td class="round-image-20"><%= image_tag((current_user || @profile.user).avatar.url(:medium)) %></td>
+<br>
+<br>
+<p>
+  <strong>Name:</strong>
+  <%= @profile.name %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @profile.city %>
+</p>
+<p>
+  <strong>State:</strong>
+  <%= @profile.state %>
+</p>
+
+<div id="doctor">
+  <p>
+    <strong>Speciality:</strong>
+    <%= @profile.doctor_profile_speciality %>
+  </p>
+  <p>
+    <strong>Gratuate School:</strong>
+    <%= @profile.doctor_profile_gratuate_school %>
+  </p>
+  <p>
+    <strong>Degree:</strong>
+    <%= @profile.doctor_profile_degree %>
+  </p>
+
+  <p>
+    <strong>Graduated At:</strong>
+    <%= @profile.doctor_profile_year_of_completion %>
+  </p>
+
+  <p>
+    <strong>Professional License:</strong>
+    <%= @profile.doctor_profile_professional_license %>
+  </p>
+</div>

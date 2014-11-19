@@ -1,0 +1,14 @@
+<h1> Payments to make: </h1>
+<% @ready_for_payments.each do |payment|%>
+  <div>
+    <%= link_to "Make payment to #{payment.try(:doctor_profile).try(:profile).try(:name)}", new_payment_path(:payment_id => payment.id)  %>
+  </div>
+<% end %>
+
+<h1> Paid payments: </h1>
+
+<% @paid_payments.each do |payment|%>
+  <div>
+    Made To: <%= payment.try(:doctor_profile).try(:profile).try(:name) %>
+  </div>
+<% end %>

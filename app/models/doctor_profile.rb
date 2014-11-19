@@ -2,7 +2,7 @@ class DoctorProfile < ActiveRecord::Base
 
   belongs_to :profile
 
-  has_many :stripe_access_cred
+  has_many :stripe_access_creds
 
   validates :speciality, presence: true
   validates :degree, presence: true

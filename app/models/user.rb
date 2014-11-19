@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :stripe_access_creds, :foreign_key => :patient_id
   has_one :profile
   accepts_nested_attributes_for :profile
 

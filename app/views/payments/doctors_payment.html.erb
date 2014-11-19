@@ -1,0 +1,26 @@
+<h1> Made permissions for new payments: </h1>
+<% @pendind_permissions.each do |payment|%>
+  <div>
+    <%= link_to "Permit  to pay",       "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=#{@stripe_client_id}&scope=read_write&state=#{payment.id}" %> to <%= payment.try(:patient).try(:profile).try(:name) %>
+  </div>
+  <br>
+<% end %>
+
+<h1> Received Payments:  </h1>
+
+<% @received_payments.each do |payment|%>
+  <div>
+    Made By: <%= payment.try(:patient).try(:profile).try(:name) %>
+  </div>
+  <br>
+<% end %>
+
+<h1></h1>
+@pendind_payments
+
+<% @pendind_payments.each do |payment|%>
+  <div>
+    From: <%= payment.try(:patient).try(:profile).try(:name) %>
+  </div>
+  <br>
+<% end %>

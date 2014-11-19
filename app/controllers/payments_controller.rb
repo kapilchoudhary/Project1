@@ -6,8 +6,28 @@ class PaymentsController < ApplicationController
     @payment = Payment.new
   end
 
+  def index
+    if current_user.is_doctor?
+      @stripe_client_id = ENV['CLIENT_ID']
+      @pendind_permissions = current_user.try(:profile).try(:doctor_profile).stripe_access_creds.where(:access_token => nil)
+      @received_payments = current_user.try(:profile).try(:doctor_profile).stripe_access_creds.where(:paid => true)
+      @pendind_payments = current_user.try(:profile).try(:doctor_profile).stripe_access_creds.where("access_token IS NOT NULL")
+      render 'doctors_payment'
+    elsif current_user.is_patient?
+      @ready_for_payments = current_user.stripe_access_creds.where("access_token IS NOT NULL AND paid =?", false)
+      @paid_payments = current_user.stripe_access_creds.where(:paid => true)
+      render 'patients_payment'
+    end
+  end
+
+  def initiate_payment
+    profile = Profile.find(params[:doctor_id])
+    StripeAccessCred.create(:doctor_profile_id => profile.doctor_profile.id, :patient_id => current_user.id )
+    redirect_to payments_path, :notice => 'Have send request!'
+  end
+
   def access_setup
-	  access_cred = StripeAccessCred.new(doctor_profile_id: current_user.profile.doctor_profile)
+	  access_cred = StripeAccessCred.where(id: params['state']).first
 	  access_cred.access_token = params['code']
 	  if access_cred.save
 			flash[:notice] = "You have completed your account setting!"
@@ -22,7 +42,7 @@ class PaymentsController < ApplicationController
 		token = params[:payment][:stripe_card_token]
 
 		# This fetches payment code
-		payment_info = StripeAccessCred.all.order(:created_at => :asc).last
+		payment_info = StripeAccessCred.where(:id => params[:payment_id]).first
 
 		if payment_info
 			begin
@@ -38,8 +58,10 @@ class PaymentsController < ApplicationController
 							response['access_token']
 						)
 					if charge.paid
-						flash[:notice] = "Fee successfully submitted!"
-					else
+            payment_info.paid = true
+            payment_info.save!
+        		flash[:notice] = "Fee successfully submitted!"
+        	else
 						flash[:error] = charge.failure_message
 					end
 				else
@@ -52,5 +74,6 @@ class PaymentsController < ApplicationController
 		else
 			flash[:error] = "Doctor's stripe info is not setup!"
 		end
+    redirect_to payments_path
   end
 end

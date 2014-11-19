@@ -25,6 +25,7 @@
             <td><%= profile.state %></td>
             <td><%= profile.doctor_profile.try(:degree) %></td>
             <td><%= profile.doctor_profile.try(:speciality) %></td>
+            <td><%= link_to 'View Doctor Profile', doctor_profile_path(:id => profile) %></td>
           </tr>
         <% end %>
       </tbody>

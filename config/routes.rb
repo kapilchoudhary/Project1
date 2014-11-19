@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     collection do
       get :edit
     end
+    member do
+      get :doctor
+    end
   end
    
   devise_for :users, :skip => [:registrations] , :controllers => {:registartions => "users/registartions"}
@@ -25,10 +28,11 @@ Rails.application.routes.draw do
     put  'patients' => 'users/registrations#update'
   end
 
-  resources :payments, only: [:new] do
+  resources :payments, only: [:new, :index] do
     collection do
       get :access_setup
       post :transaction_fees
+      put :initiate_payment
     end
   end
 

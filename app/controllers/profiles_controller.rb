@@ -75,6 +75,10 @@ class ProfilesController < ApplicationController
     redirect_to profiles_path, notice: "Not authorized to edit this profile." if @profile.nil?
   end
 
+  def doctor
+    @profile = Profile.find(params[:id])
+  end
+
   private
 
   def set_profile
