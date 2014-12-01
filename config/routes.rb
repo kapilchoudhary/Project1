@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   devise_for :users, :skip => [:registrations] , :controllers => {:registartions => "users/registartions"}
 
   devise_scope :user do
+    delete '/users' => "devise/registrations#destroy", :as => 'user_registration'
     get  'users/sign_up' => 'users/registrations#new'
     get  'users/:id/edit' => 'users/registrations#edit'
     
